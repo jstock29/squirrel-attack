@@ -1,0 +1,36 @@
+service: api
+frameworkVersion: '3'
+provider:
+  name: aws
+  runtime: python3.8
+plugins:
+  - serverless-python-requirements
+custom:
+  pythonRequirements:
+    layer: true
+    slim: true
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - httpApi:
+          path: /hello
+          method: get
+    layers:
+      - Ref: PythonRequirementsLambdaLayer
+  testConnection:
+    handler: handler.test_connection
+    events:
+      - httpApi:
+          path: /test
+          method: get
+    layers:
+      - Ref: PythonRequirementsLambdaLayer
+  getSquirrels:
+    handler: handler.get_data
+    events:
+      - httpApi:
+          path: /squirrels
+          method: get
+    layers:
+      - Ref: PythonRequirementsLambdaLayer
