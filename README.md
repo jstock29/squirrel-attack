@@ -5,12 +5,14 @@ My friend hates squirrels. This is for her.
 
 ## Install
 
-###Frontend
+### Frontend
+
 Requires Node 16
 
 `npm i`
 
-###Backend
+### Backend
+
 Requires Python 3.8
 
 `cd backend`
@@ -19,7 +21,7 @@ Requires Python 3.8
 
 `source venv/bin/activate`
 
-`pip install -r requirements.txt`
+`pip install -r requirements-core.txt`
 
 ## Run
 
