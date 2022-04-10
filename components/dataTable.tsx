@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { DataTable } from 'react-native-paper';
+import {Card, DataTable} from 'react-native-paper';
 import {useEffect, useState} from "react";
 
 const optionsPerPage = [10,25,50];
@@ -21,7 +21,7 @@ const CustomTable = () => {
 
     const getSquirrels = async () => {
         try {
-            const response = await fetch(`http://74.64.138.162:8000/squirrels/`,
+            const response = await fetch(`http://localhost:8000/squirrels/`,
                 {
                     mode: 'cors',
                     method: 'GET',
@@ -52,6 +52,7 @@ const CustomTable = () => {
     }, []);
 
     return (
+        <Card>
         <DataTable>
             <DataTable.Header>
                 <DataTable.Title>Squirrel ID</DataTable.Title>
@@ -70,9 +71,9 @@ const CustomTable = () => {
                 <DataTable.Cell>{d["Age"]}</DataTable.Cell>
                 <DataTable.Cell>{d["Primary Fur Color"]}</DataTable.Cell>
                 <DataTable.Cell>{d["Location"]}</DataTable.Cell>
-                <DataTable.Cell>{d["Tail flags"]}</DataTable.Cell>
-                <DataTable.Cell>{d["Tail twitches"]}</DataTable.Cell>
-                <DataTable.Cell>{d["Approaches"]}</DataTable.Cell>
+                <DataTable.Cell>{d["Tail flags"].toString()}</DataTable.Cell>
+                <DataTable.Cell>{d["Tail twitches"].toString()}</DataTable.Cell>
+                <DataTable.Cell>{d["Approaches"].toString()}</DataTable.Cell>
             </DataTable.Row>) }
             <DataTable.Pagination
                 page={page}
@@ -86,6 +87,7 @@ const CustomTable = () => {
                 optionsLabel={'Rows per page'}
             />
         </DataTable>
+        </Card>
     );
 }
 
