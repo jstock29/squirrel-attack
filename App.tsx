@@ -52,8 +52,7 @@ export default function App() {
     }
 
     useEffect(() => {
-        setLoading(true)
-        // getSquirrels();
+        // setLoading(true)
     }, []);
 
 
