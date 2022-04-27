@@ -72,10 +72,11 @@ def preprocess_data(categorical_cols: list, numeric_cols: list):
 
 def make_model(df):
     feature_cols = ['Tail flags','Tail twitches', 'Primary Fur Color', 'Approaches']
-    categorical_feature_cols = ['Tail flags','Tail twitches', 'Primary Fur Color']
-    numeric_feature_cols = []
+    categorical_feature_cols = ['Primary Fur Color']
+    numeric_feature_cols = ['Tail flags','Tail twitches']
     df = df[feature_cols]
-    df = df.dropna()
+    df.drop_duplicates(subset=['Unique Squirrel ID'], inplace=True)
+    df.dropna(inplace=True)
     y = df['Approaches']
     X = df[categorical_feature_cols + numeric_feature_cols]
     X_train, X_valid, y_train, y_valid = split_data(X, y)

@@ -1,22 +1,19 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {
     Appbar,
     Provider as PaperProvider,
 
 } from 'react-native-paper';
-import DropDown from "react-native-paper-dropdown";
-
 import {StatusBar} from 'expo-status-bar';
 import CustomTable from "./components/dataTable";
 import Predictor from "./components/predictor";
-import {green500, red800} from "react-native-paper/lib/typescript/styles/colors";
 
 export default function App() {
     useEffect(() => {
         // setLoading(true)
     }, []);
-
+    const [isLoading, setLoading] = useState(true);
 
     return (
         <PaperProvider>
@@ -36,7 +33,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
-        maxWidth:400,
+        // maxWidth:400,
     },
     bottom: {
         position: 'absolute',

@@ -1,12 +1,12 @@
 import * as React from 'react';
-import {Button, Card, Checkbox, Headline, Paragraph} from 'react-native-paper';
+import {ActivityIndicator, Button, Card, Checkbox, Headline, Paragraph} from 'react-native-paper';
 import {useState} from "react";
 import DropDown from "react-native-paper-dropdown";
 import {StyleSheet, Text} from "react-native";
 
 
 const Predictor = () => {
-    const [isLoading, setLoading] = useState(true);
+    const [isLoading, setLoading] = useState(false);
     const [showDropDown, setShowDropDown] = useState(false);
     const [pred, setPred] = useState(null);
     const [furColor, setFurColor] = React.useState('Gray');
@@ -30,12 +30,14 @@ const Predictor = () => {
                     headers: {'Content-Type': 'application/json'}
                 });
             const json = await response.json();
-            console.log(json)
-            setPred(json);
+            console.log(json.prediction)
+            setPred(json.prediction);
             setLoading(false)
 
         } catch (error) {
             console.error(error);
+            setLoading(false)
+
         } finally {
             setLoading(false);
         }
@@ -79,9 +81,12 @@ const Predictor = () => {
                 )}>Predict</Button>
             </Card.Actions>
             <Card.Content>
+                {isLoading &&
+                <ActivityIndicator/>
+                }
                 {pred!==null &&
                 <div>
-                    <Paragraph>{pred
+                    <Paragraph>{pred===false
                         ? <Headline style={styles.harmless}>Chill, that squirrel is harmless!</Headline>
                         : <Headline style={styles.scary}>Yep, better get out of there!</Headline>
                     }</Paragraph>
@@ -96,7 +101,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
-        maxWidth:400,
+        // maxWidth:400,
         // alignItems: 'center',
         // justifyContent: 'center',
     },

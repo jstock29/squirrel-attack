@@ -37,7 +37,8 @@ async def predict(flags: str, twitches: str, primary_fur_color: str):
     })
     p = list(model.predict(X))
     pred = p[0]
-    return {"prediction": bool(pred)}
+    return {"prediction": bool(True)}
+#     return {"prediction": bool(pred)}
 
 
 @app.get("/squirrels/")

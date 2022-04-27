@@ -16,7 +16,7 @@ interface squirrelData {
 }
 
 const CustomTable = () => {
-    const [isLoading, setLoading] = useState(true);
+    const [isLoading, setLoading] = useState(false);
     const [squirrels, setSquirrels] = useState([]);
 
     const getSquirrels = async () => {
@@ -30,10 +30,9 @@ const CustomTable = () => {
             const json = await response.json();
             setSquirrels(json);
             setLoading(false)
-
-
         } catch (error) {
             console.error(error);
+            setLoading(false)
         } finally {
             setLoading(false);
         }
@@ -64,7 +63,6 @@ const CustomTable = () => {
                 <DataTable.Title>Tail Twitches</DataTable.Title>
                 <DataTable.Title>Approaches</DataTable.Title>
             </DataTable.Header>
-
             { squirrels.map((d: squirrelData) => <DataTable.Row key={d['Unique Squirrel ID']}>
                 <DataTable.Cell>{d["Unique Squirrel ID"]}</DataTable.Cell>
                 <DataTable.Cell>{d["Shift"]}</DataTable.Cell>
@@ -75,17 +73,6 @@ const CustomTable = () => {
                 <DataTable.Cell>{d["Tail twitches"].toString()}</DataTable.Cell>
                 <DataTable.Cell>{d["Approaches"].toString()}</DataTable.Cell>
             </DataTable.Row>) }
-            <DataTable.Pagination
-                page={page}
-                numberOfPages={10}
-                onPageChange={(page) => setPage(page)}
-                label=""
-                optionsPerPage={optionsPerPage}
-                itemsPerPage={itemsPerPage}
-                setItemsPerPage={setItemsPerPage}
-                showFastPagination
-                optionsLabel={'Rows per page'}
-            />
         </DataTable>
         </Card>
     );
